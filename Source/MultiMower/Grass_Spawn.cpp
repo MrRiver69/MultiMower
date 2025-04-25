@@ -2,6 +2,8 @@
 
 
 #include "Grass_Spawn.h"
+#include "Math/Rotator.h"
+#include "Math/UnrealMathUtility.h"
 
 // Sets default values
 AGrass_Spawn::AGrass_Spawn()
@@ -48,8 +50,13 @@ bool AGrass_Spawn::SpawnActor()
 		SpawnLocation.Y += -BoxBounds.BoxExtent.Y + 2 * BoxBounds.BoxExtent.Y * FMath::FRand();
 		SpawnLocation.Z += -BoxBounds.BoxExtent.Z + 2 * BoxBounds.BoxExtent.Z * FMath::FRand();
 
+		// compute random rotation
+		FRotator SpawnRotation = FRotator::MakeFromEuler(FVector(
+			(0),(0),FMath::RandRange(0.0f, 360.0f)
+		));
+
 		//Spawn actor
-		SpawnedActor = GetWorld()->SpawnActor(ActorClassToBeSpawned, &SpawnLocation) != nullptr;
+		SpawnedActor = GetWorld()->SpawnActor<AActor>(ActorClassToBeSpawned, SpawnLocation, SpawnRotation) != nullptr;
 	}
 	return SpawnedActor;
 }
@@ -74,8 +81,8 @@ void AGrass_Spawn::EnableActorSpawning(bool Enable)
 
 void AGrass_Spawn::ScheduleActorSpawn()
 {
-	//compute time offset to spawn
-	float DeltaToNextSpawn = AvgSpawnTime + (-RandomSpawnTimeOffset + 2 * RandomSpawnTimeOffset * FMath::FRand());
+	//time to spawn
+	float DeltaToNextSpawn = 0.000001f;
 
 	//Schedule spawning
 	GetWorld()->GetTimerManager().SetTimer(SpawnTimerHandle, this, &AGrass_Spawn::SpawnActorScheduled, DeltaToNextSpawn, false);

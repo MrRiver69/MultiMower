@@ -48,11 +48,11 @@ public:
 
 	// Time between spawn
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float AvgSpawnTime = 5.f;
+	float AvgSpawnTime = 0.0001f;
 
 	// Random +/- offset spawn time
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float RandomSpawnTimeOffset = 1.f;
+	float RandomSpawnTimeOffset = 0.00005f;
 
 	//actor should spawn
 	UPROPERTY(EditAnywhere)
