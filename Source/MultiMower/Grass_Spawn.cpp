@@ -90,17 +90,20 @@ void AGrass_Spawn::ScheduleActorSpawn()
 
 void AGrass_Spawn::SpawnActorScheduled()
 {
-	//Spawn and reschedule if needed
-	if (SpawnActor())
+	for (int i = 0; i<100; i++)
 	{
-		if (ShouldSpawn)
+		//Spawn and reschedule if needed
+		if (SpawnActor())
 		{
-			ScheduleActorSpawn();
+			if (ShouldSpawn)
+			{
+				ScheduleActorSpawn();
+			}
 		}
-	}
-	else 
-	{
-		//log error
+		else
+		{
+			//log error
+		}
 	}
 
 }
