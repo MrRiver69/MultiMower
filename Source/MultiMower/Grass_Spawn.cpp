@@ -82,7 +82,7 @@ void AGrass_Spawn::EnableActorSpawning(bool Enable)
 void AGrass_Spawn::ScheduleActorSpawn()
 {
 	//time to spawn
-	float DeltaToNextSpawn = 0.000001f;
+	float DeltaToNextSpawn = 0.00000001f;
 
 	//Schedule spawning
 	GetWorld()->GetTimerManager().SetTimer(SpawnTimerHandle, this, &AGrass_Spawn::SpawnActorScheduled, DeltaToNextSpawn, false);
@@ -90,7 +90,7 @@ void AGrass_Spawn::ScheduleActorSpawn()
 
 void AGrass_Spawn::SpawnActorScheduled()
 {
-	for (int i = 0; i<100; i++)
+	for (int i = 0; i<150; i++)
 	{
 		//Spawn and reschedule if needed
 		if (SpawnActor())
