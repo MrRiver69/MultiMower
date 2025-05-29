@@ -58,6 +58,10 @@ public:
 	UPROPERTY(EditAnywhere)
 	bool ShouldSpawn = true;
 
+	//should spawn golden grass
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool SpawnGolden = true;
+
 private:
 	// Actor spawn area box
 	UPROPERTY(EditDefaultsOnly)
